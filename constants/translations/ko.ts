@@ -1,0 +1,136 @@
+import { TranslationKey } from '@/types/language';
+
+export const ko: TranslationKey = {
+  // Common
+  appName: "생각 전환",
+  save: "저장",
+  cancel: "취소",
+  delete: "삭제",
+  edit: "수정",
+  
+  // Home
+  greeting_morning: "좋은 아침입니다",
+  greeting_afternoon: "안녕하세요",
+  greeting_evening: "좋은 저녁입니다",
+  howAreYouFeeling: "오늘 기분이 어떠신가요?",
+  recordThought: "생각 기록하기",
+  thoughtsToReframe: "전환할 생각들",
+  recentThoughts: "최근 생각들",
+  noThoughtsYet: "아직 기록된 생각이 없습니다",
+  noThoughtsMessage: "첫 번째 생각을 기록하고 전환을 시작해보세요.",
+  
+  // Emotions
+  anger: "분노",
+  anxiety: "불안",
+  sadness: "슬픔",
+  fear: "두려움",
+  shame: "수치심",
+  disappointment: "실망",
+  frustration: "좌절",
+  guilt: "죄책감",
+  neutral: "중립",
+  joy: "기쁨",
+  gratitude: "감사",
+  calm: "평온",
+  hope: "희망",
+  
+  // Thought Entry
+  whatsOnYourMind: "무슨 생각을 하고 계신가요?",
+  writeDownThought: "생각을 적어보세요...",
+  howAreYouFeelingQuestion: "어떤 감정이 드나요?",
+  categorizeThought: "생각의 카테고리",
+  addTags: "태그 추가 (선택사항)",
+  addTagsPlaceholder: "입력 후 스페이스바 또는 엔터",
+  continueToReframe: "전환하러 가기",
+  
+  // Reframe
+  yourThought: "당신의 생각:",
+  helpfulPrompts: "도움이 되는 질문들",
+  considerThis: "이렇게 생각해보세요:",
+  reframeYourThought: "생각 전환하기",
+  writeBalancedPerspective: "더 균형 잡힌 관점으로 작성해보세요...",
+  getAISuggestion: "AI 제안 받기",
+  saveReframe: "전환 저장하기",
+  
+  // Thought Detail
+  originalThought: "원래 생각",
+  reframedThought: "전환된 생각",
+  aiGenerated: "AI 생성",
+  editReframe: "전환 수정하기",
+  notReframedYet: "아직 이 생각을 전환하지 않았습니다.",
+  reframeNow: "지금 전환하기",
+  insights: "인사이트",
+  
+  // Journal
+  journalPrompt: "저널 프롬프트",
+  tapToRefresh: "탭하여 새로고침",
+  searchThoughts: "생각 검색...",
+  noMatchingThoughts: "일치하는 생각이 없습니다",
+  journalEmpty: "저널이 비어있습니다",
+  journalEmptyMessage: "당신의 생각과 성찰이 여기에 표시됩니다",
+  
+  // Insights
+  emotionPatterns: "감정 패턴",
+  recordToSeePatterns: "생각을 기록하여 감정 패턴을 확인하세요",
+  yourInsights: "당신의 인사이트",
+  mostCommonEmotion: "가장 흔한 감정:",
+  thoughtsReframed: "전환된 생각:",
+  averageTimeToReframe: "평균 전환 시간:",
+  recordToSeeInsights: "생각을 기록하여 맞춤형 인사이트를 확인하세요",
+  pastSevenDays: "최근 7일",
+  pastThirtyDays: "최근 30일",
+  allTime: "전체 기간",
+  week: "주간",
+  month: "월간",
+  all: "전체",
+  thoughts: "생각",
+  reframed: "전환됨",
+  avgMood: "평균 기분",
+  of: "중",
+  minutes: "분",
+  hours: "시간",
+  days: "일",
+  notAvailable: "없음",
+  tryToReframeMore: "더 많은 생각을 전환해보세요. 긍정적 사고의 습관을 기를 수 있습니다.",
+  anxietyTip: "불안을 많이 경험하고 계시네요. 불안한 생각이 들 때 심호흡을 시도해보세요.",
+  angerTip: "분노가 자주 나타나고 있습니다. 반응하기 전에 잠시 진정할 시간을 가져보세요.",
+  sadnessTip: "슬픔을 느끼고 계시네요. 자기 자신에게 친절하게 대하고 지지해주는 사람들에게 연락해보세요.",
+  fearTip: "두려움이 있으신가요? 두려운 결과가 실제로 일어날 증거가 있는지 자문해보세요.",
+  keepTrackingThoughts: "계속해서 생각을 기록하면 사고 패턴에 대한 더 깊은 인사이트를 얻을 수 있습니다.",
+  
+  // Profile
+  preferences: "환경설정",
+  dailyReminder: "일일 알림",
+  reminderTime: "알림 시간",
+  streakGoal: "연속 목표",
+  days: "일",
+  darkMode: "다크 모드",
+  system: "시스템",
+  light: "라이트",
+  dark: "다크",
+  aiSuggestions: "AI 제안",
+  language: "언어",
+  english: "English",
+  korean: "한국어",
+  about: "정보",
+  aboutReframing: "생각 전환에 대하여",
+  rateApp: "앱 평가하기",
+  clearAllData: "모든 데이터 삭제",
+  clearDataConfirm: "모든 데이터 삭제",
+  clearDataWarning: "모든 생각을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+  version: "생각 전환 v2.0.0",
+  tagline: "생각을 바꾸면, 삶이 바뀝니다",
+  
+  // Categories
+  workAndCareer: "일과 경력",
+  relationships: "인간관계",
+  healthAndWellness: "건강과 웰빙",
+  selfImage: "자아상",
+  futureAndGoals: "미래와 목표",
+  pastRegrets: "과거의 후회",
+  dailyStressors: "일상 스트레스",
+  socialSituations: "사회적 상황",
+  
+  // Journal
+  none: "없음"
+};

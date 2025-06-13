@@ -1,0 +1,136 @@
+import { TranslationKey } from '@/types/language';
+
+export const en: TranslationKey = {
+  // Common
+  appName: "Reframe",
+  save: "Save",
+  cancel: "Cancel",
+  delete: "Delete",
+  edit: "Edit",
+  
+  // Home
+  greeting_morning: "Good morning",
+  greeting_afternoon: "Good afternoon",
+  greeting_evening: "Good evening",
+  howAreYouFeeling: "How are you feeling today?",
+  recordThought: "Record a thought",
+  thoughtsToReframe: "Thoughts to reframe",
+  recentThoughts: "Recent thoughts",
+  noThoughtsYet: "No thoughts yet",
+  noThoughtsMessage: "Record your first thought to get started with reframing.",
+  
+  // Emotions
+  anger: "Anger",
+  anxiety: "Anxiety",
+  sadness: "Sadness",
+  fear: "Fear",
+  shame: "Shame",
+  disappointment: "Disappointment",
+  frustration: "Frustration",
+  guilt: "Guilt",
+  neutral: "Neutral",
+  joy: "Joy",
+  gratitude: "Gratitude",
+  calm: "Calm",
+  hope: "Hope",
+  
+  // Thought Entry
+  whatsOnYourMind: "What's on your mind?",
+  writeDownThought: "Write down your thought...",
+  howAreYouFeelingQuestion: "How are you feeling?",
+  categorizeThought: "Categorize your thought",
+  addTags: "Add tags (optional)",
+  addTagsPlaceholder: "Type and press space or enter",
+  continueToReframe: "Continue to Reframe",
+  
+  // Reframe
+  yourThought: "Your thought:",
+  helpfulPrompts: "Helpful prompts",
+  considerThis: "Consider this:",
+  reframeYourThought: "Reframe your thought",
+  writeBalancedPerspective: "Write a more balanced perspective...",
+  getAISuggestion: "Get AI Suggestion",
+  saveReframe: "Save Reframe",
+  
+  // Thought Detail
+  originalThought: "Original Thought",
+  reframedThought: "Reframed Thought",
+  aiGenerated: "AI Generated",
+  editReframe: "Edit Reframe",
+  notReframedYet: "You haven't reframed this thought yet.",
+  reframeNow: "Reframe Now",
+  insights: "Insights",
+  
+  // Journal
+  journalPrompt: "Journal Prompt",
+  tapToRefresh: "Tap to refresh",
+  searchThoughts: "Search thoughts...",
+  noMatchingThoughts: "No matching thoughts",
+  journalEmpty: "Your journal is empty",
+  journalEmptyMessage: "Your thoughts and reflections will appear here",
+  
+  // Insights
+  emotionPatterns: "Emotion Patterns",
+  recordToSeePatterns: "Record thoughts to see your emotion patterns",
+  yourInsights: "Your Insights",
+  mostCommonEmotion: "Most common emotion:",
+  thoughtsReframed: "Thoughts reframed:",
+  averageTimeToReframe: "Average time to reframe:",
+  recordToSeeInsights: "Record thoughts to see your personalized insights",
+  pastSevenDays: "Past 7 days",
+  pastThirtyDays: "Past 30 days",
+  allTime: "All time",
+  week: "Week",
+  month: "Month",
+  all: "All",
+  thoughts: "Thoughts",
+  reframed: "Reframed",
+  avgMood: "Avg Mood",
+  of: "of",
+  minutes: "minutes",
+  hours: "hours",
+  days: "days",
+  notAvailable: "N/A",
+  tryToReframeMore: "Try to reframe more of your thoughts to build a habit of positive thinking.",
+  anxietyTip: "You've been experiencing anxiety. Try deep breathing exercises when anxious thoughts arise.",
+  angerTip: "Anger has been common for you. Consider taking a moment to cool down before responding to triggers.",
+  sadnessTip: "You've been feeling sad. Remember to practice self-compassion and reach out to supportive people.",
+  fearTip: "Fear has been present. Try asking yourself what evidence you have that the feared outcome will happen.",
+  keepTrackingThoughts: "Keep tracking your thoughts to gain deeper insights into your thinking patterns.",
+  
+  // Profile
+  preferences: "Preferences",
+  dailyReminder: "Daily Reminder",
+  reminderTime: "Reminder Time",
+  streakGoal: "Streak Goal",
+  days: "days",
+  darkMode: "Dark Mode",
+  system: "System",
+  light: "Light",
+  dark: "Dark",
+  aiSuggestions: "AI Suggestions",
+  language: "Language",
+  english: "English",
+  korean: "Korean",
+  about: "About",
+  aboutReframing: "About Reframing",
+  rateApp: "Rate the App",
+  clearAllData: "Clear All Data",
+  clearDataConfirm: "Clear All Data",
+  clearDataWarning: "Are you sure you want to delete all your thoughts? This action cannot be undone.",
+  version: "Reframe v2.0.0",
+  tagline: "Transform your thoughts, transform your life",
+  
+  // Categories
+  workAndCareer: "Work & Career",
+  relationships: "Relationships",
+  healthAndWellness: "Health & Wellness",
+  selfImage: "Self-Image",
+  futureAndGoals: "Future & Goals",
+  pastRegrets: "Past Regrets",
+  dailyStressors: "Daily Stressors",
+  socialSituations: "Social Situations",
+  
+  // Journal
+  none: "None"
+};
