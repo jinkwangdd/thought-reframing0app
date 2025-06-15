@@ -1,0 +1,101 @@
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    # Clean previous builds
+    clean_build_artifacts
+    
+    # Increment build number
+    increment_build_number(xcodeproj: "thoughtsreframer.xcodeproj")
+    
+    # Build the app
+    build_app(
+      scheme: "thoughtsreframer",
+      workspace: "thoughtsreframer.xcworkspace",
+      configuration: "Release",
+      export_method: "app-store",
+      clean: true,
+      # Manual code signing
+      codesigning_identity: ENV['CODE_SIGN_IDENTITY'] || 'Apple Distribution',
+      export_xcargs: "-allowProvisioningUpdates DEVELOPMENT_TEAM=#{ENV['TEAM_ID']} CODE_SIGN_STYLE=Manual #{"PROVISIONING_PROFILE=#{ENV['PROVISIONING_PROFILE_UUID']}" if ENV['PROVISIONING_PROFILE_UUID']}",
+      export_options: {
+        method: "app-store",
+        teamID: ENV['TEAM_ID'],
+        signingCertificate: ENV['CODE_SIGN_IDENTITY'] || 'Apple Distribution',
+        provisioningProfiles: {
+          "com.solum.reframe.app" => ENV['PROVISIONING_PROFILE_UUID']
+        },
+        uploadBitcode: false,
+        uploadSymbols: true,
+        compileBitcode: false,
+        signingStyle: "manual"
+      }
+    )
+    
+    # Upload to TestFlight
+    upload_to_testflight(
+      apple_id: ENV['APPLE_ID'],
+      app_identifier: "com.solum.reframe.app",
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Push a new beta build to TestFlight with auto-detection"
+  lane :beta_auto do
+    # Clean previous builds
+    clean_build_artifacts
+    
+    # Increment build number
+    increment_build_number(xcodeproj: "thoughtsreframer.xcodeproj")
+    
+    # Detect available certificates
+    cert_name = nil
+    begin
+      cert_output = sh("security find-identity -v -p codesigning | grep 'Apple Distribution' | head -n 1 | cut -d '\"' -f 2", log: false)
+      cert_name = cert_output.strip if cert_output && !cert_output.strip.empty?
+    rescue
+      # Fallback to common names
+      cert_name = "Apple Distribution"
+    end
+    
+    UI.message("🔑 Using certificate: #{cert_name}")
+    
+    # Build the app with detected certificate
+    build_app(
+      scheme: "thoughtsreframer",
+      workspace: "thoughtsreframer.xcworkspace",
+      configuration: "Release",
+      export_method: "app-store",
+      clean: true,
+      # Manual code signing with detected certificate
+      codesigning_identity: cert_name,
+      export_xcargs: "-allowProvisioningUpdates DEVELOPMENT_TEAM=#{ENV['TEAM_ID']} CODE_SIGN_STYLE=Manual #{"PROVISIONING_PROFILE=#{ENV['PROVISIONING_PROFILE_UUID']}" if ENV['PROVISIONING_PROFILE_UUID']}",
+      export_options: {
+        method: "app-store",
+        teamID: ENV['TEAM_ID'],
+        signingCertificate: cert_name,
+        provisioningProfiles: {
+          "com.solum.reframe.app" => ENV['PROVISIONING_PROFILE_UUID']
+        },
+        uploadBitcode: false,
+        uploadSymbols: true,
+        compileBitcode: false,
+        signingStyle: "manual"
+      }
+    )
+    
+    # Upload to TestFlight
+    upload_to_testflight(
+      apple_id: ENV['APPLE_ID'],
+      app_identifier: "com.solum.reframe.app",
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Clean all build artifacts and derived data"
+  lane :clean_all do
+    clean_build_artifacts
+    clear_derived_data
+    sh("rm -rf ~/Library/Developer/Xcode/Archives/*")
+    UI.success("🧹 Cleaned all build artifacts")
+  end
+end 
