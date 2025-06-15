@@ -53,7 +53,6 @@ jobs:
         UUID=$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision))
         cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$UUID.mobileprovision
         echo "Installed provisioning profile with UUID: $UUID"
-        security cms -D -i profile.mobileprovision | grep -A1 "TeamIdentifier" || true
         
     - name: List Available Code Signing Identities
       run: |
