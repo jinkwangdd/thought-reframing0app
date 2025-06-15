@@ -55,24 +55,67 @@ jobs:
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         echo "$MOBILEPROVISION" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
         
-        # Extract provisioning profile UUID
-        PROFILE_UUID=$(security cms -D -i ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision | /usr/libexec/PlistBuddy -c "Print :UUID" -)
-        echo "PROVISIONING_PROFILE_UUID=$PROFILE_UUID" >> $GITHUB_ENV
+        # Extract provisioning profile UUID with better error handling
+        echo "🔍 Extracting provisioning profile information..."
+        security cms -D -i ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision > /tmp/profile.plist
         
-        # Detect and set certificate name
-        CERT_NAME=$(security find-identity -v -p codesigning | grep "Apple Distribution\|iOS Distribution" | head -n 1 | cut -d '"' -f 2)
-        if [ -z "$CERT_NAME" ]; then
-          CERT_NAME=$(security find-identity -v -p codesigning | grep "Distribution" | head -n 1 | cut -d '"' -f 2)
+        # Try different methods to extract UUID
+        PROFILE_UUID=""
+        if command -v plutil >/dev/null 2>&1; then
+          PROFILE_UUID=$(plutil -extract UUID raw /tmp/profile.plist 2>/dev/null || echo "")
         fi
-        if [ -z "$CERT_NAME" ]; then
-          CERT_NAME="Apple Distribution"
+        
+        if [ -z "$PROFILE_UUID" ]; then
+          PROFILE_UUID=$(/usr/libexec/PlistBuddy -c "Print :UUID" /tmp/profile.plist 2>/dev/null || echo "")
         fi
-        echo "CODE_SIGN_IDENTITY=$CERT_NAME" >> $GITHUB_ENV
-        echo "🔑 Detected certificate: $CERT_NAME"
+        
+        if [ -z "$PROFILE_UUID" ]; then
+          # Fallback: extract from filename or generate
+          PROFILE_UUID=$(grep -A1 "<key>UUID</key>" /tmp/profile.plist | grep "<string>" | sed 's/.*<string>\(.*\)<\/string>.*/\1/' || echo "")
+        fi
+        
+        if [ -z "$PROFILE_UUID" ]; then
+          echo "❌ Failed to extract provisioning profile UUID"
+          echo "📄 Profile content:"
+          cat /tmp/profile.plist | head -20
+          exit 1
+        fi
+        
+        echo "PROVISIONING_PROFILE_UUID=$PROFILE_UUID" >> $GITHUB_ENV
+        echo "✅ Provisioning Profile UUID: $PROFILE_UUID"
         
         # List all available identities for debugging
         echo "📋 Available signing identities:"
         security find-identity -v -p codesigning
+        
+        # Detect and set certificate name with validation
+        CERT_NAME=$(security find-identity -v -p codesigning | grep "Apple Distribution\|iOS Distribution" | head -n 1 | cut -d '"' -f 2)
+        
+        if [ -z "$CERT_NAME" ]; then
+          echo "⚠️  No Distribution certificate found, checking for Development certificates..."
+          CERT_NAME=$(security find-identity -v -p codesigning | grep "Apple Development\|iOS Development" | head -n 1 | cut -d '"' -f 2)
+          
+          if [ -n "$CERT_NAME" ]; then
+            echo "⚠️  Warning: Using Development certificate for App Store build. This may cause issues."
+            echo "💡 Please ensure you have uploaded the correct Apple Distribution certificate."
+          fi
+        fi
+        
+        if [ -z "$CERT_NAME" ]; then
+          echo "❌ No valid signing certificate found!"
+          echo "📋 Available certificates:"
+          security find-identity -v -p codesigning
+          exit 1
+        fi
+        
+        echo "CODE_SIGN_IDENTITY=$CERT_NAME" >> $GITHUB_ENV
+        echo "🔑 Using certificate: $CERT_NAME"
+        
+        # Validate certificate type
+        if echo "$CERT_NAME" | grep -q "Development"; then
+          echo "⚠️  WARNING: Using Development certificate for App Store deployment!"
+          echo "💡 This build may fail during export. Please use Apple Distribution certificate."
+        fi
 
     - name: Install dependencies
       working-directory: thoughtsreframer
