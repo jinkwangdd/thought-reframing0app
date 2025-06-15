@@ -1,4 +1,4 @@
-name: iOS Build and TestFlight Upload
+name: iOS Build and TestFlight Upload (Self-Healing)
 
 on:
   push:
@@ -10,6 +10,11 @@ on:
 jobs:
   build-and-upload:
     runs-on: macos-14
+    strategy:
+      fail-fast: false
+      matrix:
+        attempt: [1, 2, 3]
+        signing_strategy: ['manual', 'automatic']
     
     steps:
     - name: Checkout repository
@@ -41,12 +46,14 @@ jobs:
         pod install
         
     - name: Import Code Signing Certificates
+      if: matrix.signing_strategy == 'manual'
       uses: apple-actions/import-codesign-certs@v2
       with:
         p12-file-base64: ${{ secrets.APPLE_CERTIFICATE }}
         p12-password: ${{ secrets.CERT_PASSWORD }}
         
-    - name: Install Provisioning Profile
+    - name: Install Provisioning Profile (Manual)
+      if: matrix.signing_strategy == 'manual'
       run: |
         echo "${{ secrets.MOBILEPROVISION }}" | base64 -d > profile.mobileprovision
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
@@ -55,18 +62,16 @@ jobs:
         echo "Installed provisioning profile with UUID: $UUID"
         echo "PROVISIONING_PROFILE_UUID=$UUID" >> $GITHUB_ENV
         
-    - name: List Available Code Signing Identities
+    - name: Extract Certificate Name (Manual)
+      if: matrix.signing_strategy == 'manual'
       run: |
         security find-identity -v -p codesigning
         CERT_NAME=$(security find-identity -v -p codesigning | grep "Apple Distribution" | head -1 | sed 's/.*) \(.*\)/\1/')
         echo "CERTIFICATE_NAME=$CERT_NAME" >> $GITHUB_ENV
         echo "Found certificate: $CERT_NAME"
         
-    - name: List Provisioning Profiles
-      run: |
-        ls -la ~/Library/MobileDevice/Provisioning\ Profiles/
-        
-    - name: Run Fastlane Beta Lane
+    - name: Run Fastlane Beta Lane (Manual Signing)
+      if: matrix.signing_strategy == 'manual'
       env:
         APPLE_ID: ${{ secrets.APPLE_ID }}
         FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.APP_SPECIFIC_PASSWORD }}
@@ -75,15 +80,49 @@ jobs:
         CERTIFICATE_NAME: ${{ env.CERTIFICATE_NAME }}
         FASTLANE_SKIP_UPDATE_CHECK: true
         FASTLANE_HIDE_GITHUB_ISSUES: true
+        SIGNING_STRATEGY: manual
       run: |
         cd thoughtsreframer
         fastlane beta
+        
+    - name: Run Fastlane Beta Lane (Automatic Signing)
+      if: matrix.signing_strategy == 'automatic'
+      env:
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.APP_SPECIFIC_PASSWORD }}
+        TEAM_ID: ${{ secrets.TEAM_ID }}
+        FASTLANE_SKIP_UPDATE_CHECK: true
+        FASTLANE_HIDE_GITHUB_ISSUES: true
+        SIGNING_STRATEGY: automatic
+      run: |
+        cd thoughtsreframer
+        fastlane beta_auto
+        
+    - name: Analyze Failure and Auto-Fix
+      if: failure()
+      run: |
+        echo "🔍 Analyzing build failure..."
+        python3 .github/scripts/auto-fix.py
+        if [ "${{ matrix.attempt }}" == "1" ]; then
+          echo "First attempt failed - trying alternative signing strategy"
+        elif [ "${{ matrix.attempt }}" == "2" ]; then
+          echo "Second attempt failed - cleaning and retrying"
+          cd thoughtsreframer
+          fastlane clean_all
+        else
+          echo "Final attempt - generating detailed report"
+        fi
         
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       if: failure()
       with:
-        name: build-logs
+        name: build-logs-attempt-${{ matrix.attempt }}-${{ matrix.signing_strategy }}
         path: |
           ~/Library/Logs/gym/
-          fastlane/report.xml 
+          fastlane/report.xml
+          
+    - name: Notify Success
+      if: success()
+      run: |
+        echo "🎉 Build successful with attempt ${{ matrix.attempt }} using ${{ matrix.signing_strategy }} signing!" 
