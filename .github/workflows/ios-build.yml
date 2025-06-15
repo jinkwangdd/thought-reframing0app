@@ -46,10 +46,18 @@ jobs:
         security unlock-keychain -p "temppass" build.keychain
         security set-keychain-settings -t 3600 -l build.keychain
         
+        # Add keychain to search list
+        security list-keychains -d user -s build.keychain login.keychain
+        
         # Install certificate
         echo "$APPLE_CERTIFICATE" | base64 --decode > certificate.p12
-        security import certificate.p12 -k build.keychain -P "$CERT_PASSWORD" -T /usr/bin/codesign -T /usr/bin/xcodebuild -T /usr/bin/xcrun
+        security import certificate.p12 -k build.keychain -P "$CERT_PASSWORD" -A
+        
+        # Set partition list for the keychain
         security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "temppass" build.keychain
+        
+        # Unlock keychain again after import
+        security unlock-keychain -p "temppass" build.keychain
         
         # Install provisioning profile
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
@@ -84,16 +92,37 @@ jobs:
         echo "PROVISIONING_PROFILE_UUID=$PROFILE_UUID" >> $GITHUB_ENV
         echo "✅ Provisioning Profile UUID: $PROFILE_UUID"
         
+        # Debug keychain contents
+        echo "🔍 Debugging keychain contents..."
+        security list-keychains -d user
+        security find-identity -v build.keychain
+        
         # List all available identities for debugging
         echo "📋 Available signing identities:"
         security find-identity -v -p codesigning
         
+        # Try alternative method to find certificates
+        echo "🔍 Alternative certificate search:"
+        security find-identity -v -p codesigning build.keychain
+        
         # Detect and set certificate name with validation
-        CERT_NAME=$(security find-identity -v -p codesigning | grep "Apple Distribution\|iOS Distribution" | head -n 1 | cut -d '"' -f 2)
+        CERT_NAME=""
+        
+        # Try finding in specific keychain first
+        CERT_NAME=$(security find-identity -v -p codesigning build.keychain | grep "Apple Distribution\|iOS Distribution" | head -n 1 | cut -d '"' -f 2)
+        
+        if [ -z "$CERT_NAME" ]; then
+          # Try system-wide search
+          CERT_NAME=$(security find-identity -v -p codesigning | grep "Apple Distribution\|iOS Distribution" | head -n 1 | cut -d '"' -f 2)
+        fi
         
         if [ -z "$CERT_NAME" ]; then
           echo "⚠️  No Distribution certificate found, checking for Development certificates..."
-          CERT_NAME=$(security find-identity -v -p codesigning | grep "Apple Development\|iOS Development" | head -n 1 | cut -d '"' -f 2)
+          CERT_NAME=$(security find-identity -v -p codesigning build.keychain | grep "Apple Development\|iOS Development" | head -n 1 | cut -d '"' -f 2)
+          
+          if [ -z "$CERT_NAME" ]; then
+            CERT_NAME=$(security find-identity -v -p codesigning | grep "Apple Development\|iOS Development" | head -n 1 | cut -d '"' -f 2)
+          fi
           
           if [ -n "$CERT_NAME" ]; then
             echo "⚠️  Warning: Using Development certificate for App Store build. This may cause issues."
@@ -101,10 +130,16 @@ jobs:
           fi
         fi
         
+        # If still no certificate found, try to extract from keychain dump
+        if [ -z "$CERT_NAME" ]; then
+          echo "🔍 Trying to extract certificate name from keychain dump..."
+          CERT_NAME=$(security dump-keychain build.keychain | grep -A1 "Apple Development\|Apple Distribution\|iOS Development\|iOS Distribution" | grep "alis" | head -1 | cut -d'"' -f4)
+        fi
+        
         if [ -z "$CERT_NAME" ]; then
           echo "❌ No valid signing certificate found!"
-          echo "📋 Available certificates:"
-          security find-identity -v -p codesigning
+          echo "📋 Keychain contents:"
+          security dump-keychain build.keychain | grep -A5 -B5 "Apple\|iOS"
           exit 1
         fi
         
