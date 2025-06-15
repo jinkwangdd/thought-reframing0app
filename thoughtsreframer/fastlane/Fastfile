@@ -18,9 +18,6 @@ default_platform(:ios)
 platform :ios do
   desc "Build and upload to TestFlight"
   lane :beta do
-    # Ensure we're using the latest version of the provisioning profile
-    match(type: "appstore", readonly: true)
-    
     # Clean build artifacts
     clean_build_artifacts
     
@@ -39,9 +36,11 @@ platform :ios do
       }
     )
     
-    # Upload to TestFlight
+    # Upload to TestFlight using Apple ID
     upload_to_testflight(
-      api_key_path: "~/.appstoreconnect/private_keys/AuthKey_#{ENV['APPSTORE_CONNECT_KEY_ID']}.p8",
+      apple_id: ENV['APPLE_ID'],
+      app_identifier: "com.solum.reframe.app",
+      team_id: ENV['TEAM_ID'],
       skip_waiting_for_build_processing: true,
       skip_submission: true,
       distribute_external: false,
