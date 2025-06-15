@@ -30,10 +30,12 @@ platform :ios do
       workspace: "thoughtsreframer.xcworkspace",
       export_method: "app-store",
       configuration: "Release",
+      codesigning_identity: ENV['CERTIFICATE_NAME'],
       xcargs: "-allowProvisioningUpdates DEVELOPMENT_TEAM=#{ENV['TEAM_ID']} CODE_SIGN_STYLE=Manual PROVISIONING_PROFILE=#{ENV['PROVISIONING_PROFILE_UUID']}",
       export_options: {
         method: "app-store",
         teamID: ENV['TEAM_ID'],
+        signingCertificate: ENV['CERTIFICATE_NAME'],
         provisioningProfiles: {
           "com.solum.reframe.app" => ENV['PROVISIONING_PROFILE_UUID']
         },
