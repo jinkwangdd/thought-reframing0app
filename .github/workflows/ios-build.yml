@@ -133,7 +133,45 @@ jobs:
         # If still no certificate found, try to extract from keychain dump
         if [ -z "$CERT_NAME" ]; then
           echo "🔍 Trying to extract certificate name from keychain dump..."
-          CERT_NAME=$(security dump-keychain build.keychain | grep -A1 "Apple Development\|Apple Distribution\|iOS Development\|iOS Distribution" | grep "alis" | head -1 | cut -d'"' -f4)
+          # Extract certificate name from keychain dump
+          CERT_NAME=$(security dump-keychain build.keychain | grep -o '"Apple Development: [^"]*"' | head -1 | tr -d '"')
+          
+          if [ -z "$CERT_NAME" ]; then
+            CERT_NAME=$(security dump-keychain build.keychain | grep -o '"Apple Distribution: [^"]*"' | head -1 | tr -d '"')
+          fi
+          
+          if [ -z "$CERT_NAME" ]; then
+            CERT_NAME=$(security dump-keychain build.keychain | grep -o '"iOS Development: [^"]*"' | head -1 | tr -d '"')
+          fi
+          
+          if [ -z "$CERT_NAME" ]; then
+            CERT_NAME=$(security dump-keychain build.keychain | grep -o '"iOS Distribution: [^"]*"' | head -1 | tr -d '"')
+          fi
+          
+          # Alternative extraction method
+          if [ -z "$CERT_NAME" ]; then
+            CERT_NAME=$(security dump-keychain build.keychain | grep "Apple Development\|Apple Distribution\|iOS Development\|iOS Distribution" | grep "blob" | head -1 | sed 's/.*="\([^"]*\)".*/\1/')
+          fi
+        fi
+        
+        # Try to fix certificate chain and private key association
+        if [ -n "$CERT_NAME" ]; then
+          echo "🔧 Attempting to fix certificate chain..."
+          # Re-import with different flags to ensure private key association
+          security delete-certificate -c "$CERT_NAME" build.keychain 2>/dev/null || true
+          security import certificate.p12 -k build.keychain -P "$CERT_PASSWORD" -A -t cert -f pkcs12
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "temppass" build.keychain
+          
+          # Verify the certificate is now visible
+          echo "🔍 Verifying certificate after re-import..."
+          security find-identity -v -p codesigning build.keychain
+          
+          # If still not visible, try system keychain
+          if [ "$(security find-identity -v -p codesigning build.keychain | wc -l)" -eq 1 ]; then
+            echo "🔄 Trying system keychain import..."
+            security import certificate.p12 -k login.keychain -P "$CERT_PASSWORD" -A -t cert -f pkcs12
+            security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" login.keychain 2>/dev/null || true
+          fi
         fi
         
         if [ -z "$CERT_NAME" ]; then
