@@ -59,12 +59,15 @@ jobs:
       run: |
         security find-identity -v -p codesigning
         
+    - name: List Provisioning Profiles
+      run: |
+        ls -la ~/Library/MobileDevice/Provisioning\ Profiles/
+        
     - name: Run Fastlane Beta Lane
       env:
         APPLE_ID: ${{ secrets.APPLE_ID }}
         FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.APP_SPECIFIC_PASSWORD }}
         TEAM_ID: ${{ secrets.TEAM_ID }}
-        FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
         FASTLANE_SKIP_UPDATE_CHECK: true
         FASTLANE_HIDE_GITHUB_ISSUES: true
       run: |

@@ -29,7 +29,6 @@ platform :ios do
       scheme: "thoughtsreframer",
       workspace: "thoughtsreframer.xcworkspace",
       export_method: "app-store",
-      codesigning_identity: "Apple Distribution: Jinkwang Kim (#{ENV['TEAM_ID']})",
       configuration: "Release",
       xcargs: "-allowProvisioningUpdates",
       export_options: {
@@ -37,8 +36,7 @@ platform :ios do
         teamID: ENV['TEAM_ID'],
         uploadBitcode: false,
         uploadSymbols: true,
-        compileBitcode: false,
-        signingStyle: "manual"
+        compileBitcode: false
       }
     )
     
