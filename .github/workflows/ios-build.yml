@@ -46,11 +46,12 @@ jobs:
         
     - name: Install Provisioning Profile
       run: |
-        echo "${{ secrets.MOBILEPROVISION }}" | base64 --decode > profile.mobileprovision
+        echo "${{ secrets.MOBILEPROVISION }}" | base64 -d > profile.mobileprovision
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        UUID=$(grep -A1 -a "UUID" profile.mobileprovision | grep -o "[-A-F0-9]\{36\}")
+        UUID=$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision))
         cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$UUID.mobileprovision
         echo "Installed provisioning profile with UUID: $UUID"
+        security cms -D -i profile.mobileprovision | grep -A1 "TeamIdentifier" || true
         
     - name: List Available Code Signing Identities
       run: |
