@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A13452A5B8017D27B014232 /* Pods_thoughtsreframer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F55E6F78A2B498D0349380E /* Pods_thoughtsreframer.framework */; };
+		2B9F951D2DFC4201003D20FB /* thoughtsreframerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9F951C2DFC4201003D20FB /* thoughtsreframerApp.swift */; };
+		2B9F951F2DFC4201003D20FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9F951E2DFC4201003D20FB /* ContentView.swift */; };
+		2B9F95212DFC4204003D20FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B9F95202DFC4204003D20FB /* Assets.xcassets */; };
+		2B9F95242DFC4204003D20FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B9F95232DFC4204003D20FB /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2B7996A12DFED24E003B7F81 /* thoughtsreframer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = thoughtsreframer.entitlements; sourceTree = "<group>"; };
+		2B9F95192DFC4201003D20FB /* thoughtsreframer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = thoughtsreframer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B9F951C2DFC4201003D20FB /* thoughtsreframerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thoughtsreframerApp.swift; sourceTree = "<group>"; };
+		2B9F951E2DFC4201003D20FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2B9F95202DFC4204003D20FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B9F95232DFC4204003D20FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2B9F952A2DFC45DA003D20FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40DAEE617E00DF48D55C331D /* Pods-thoughtsreframer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thoughtsreframer.debug.xcconfig"; path = "Target Support Files/Pods-thoughtsreframer/Pods-thoughtsreframer.debug.xcconfig"; sourceTree = "<group>"; };
+		6F55E6F78A2B498D0349380E /* Pods_thoughtsreframer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_thoughtsreframer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6F95A5BFC12516B5DF5D990 /* Pods-thoughtsreframer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thoughtsreframer.release.xcconfig"; path = "Target Support Files/Pods-thoughtsreframer/Pods-thoughtsreframer.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2B9F95162DFC4201003D20FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A13452A5B8017D27B014232 /* Pods_thoughtsreframer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B9F95102DFC4201003D20FB = {
+			isa = PBXGroup;
+			children = (
+				2B9F951B2DFC4201003D20FB /* thoughtsreframer */,
+				2B9F951A2DFC4201003D20FB /* Products */,
+				378E977023558A211CEB1E8E /* Pods */,
+				CE7EC435DD6F688F16D85C77 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2B9F951A2DFC4201003D20FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2B9F95192DFC4201003D20FB /* thoughtsreframer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2B9F951B2DFC4201003D20FB /* thoughtsreframer */ = {
+			isa = PBXGroup;
+			children = (
+				2B7996A12DFED24E003B7F81 /* thoughtsreframer.entitlements */,
+				2B9F951C2DFC4201003D20FB /* thoughtsreframerApp.swift */,
+				2B9F951E2DFC4201003D20FB /* ContentView.swift */,
+				2B9F95202DFC4204003D20FB /* Assets.xcassets */,
+				2B9F95232DFC4204003D20FB /* Preview Assets.xcassets */,
+				2B9F952A2DFC45DA003D20FB /* Info.plist */,
+			);
+			path = thoughtsreframer;
+			sourceTree = "<group>";
+		};
+		378E977023558A211CEB1E8E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				40DAEE617E00DF48D55C331D /* Pods-thoughtsreframer.debug.xcconfig */,
+				B6F95A5BFC12516B5DF5D990 /* Pods-thoughtsreframer.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CE7EC435DD6F688F16D85C77 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F55E6F78A2B498D0349380E /* Pods_thoughtsreframer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2B9F95182DFC4201003D20FB /* thoughtsreframer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B9F95272DFC4204003D20FB /* Build configuration list for PBXNativeTarget "thoughtsreframer" */;
+			buildPhases = (
+				4C28BFB905DC97301C95D3BA /* [CP] Check Pods Manifest.lock */,
+				2B9F95152DFC4201003D20FB /* Sources */,
+				2B9F95162DFC4201003D20FB /* Frameworks */,
+				2B9F95172DFC4201003D20FB /* Resources */,
+				372FD210FA1B76CEFE9D010E /* [CP] Embed Pods Frameworks */,
+				02E350EE8CE16F8E5892109E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = thoughtsreframer;
+			productName = thoughtsreframer;
+			productReference = 2B9F95192DFC4201003D20FB /* thoughtsreframer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2B9F95112DFC4201003D20FB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					2B9F95182DFC4201003D20FB = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 2B9F95142DFC4201003D20FB /* Build configuration list for PBXProject "thoughtsreframer" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2B9F95102DFC4201003D20FB;
+			productRefGroup = 2B9F951A2DFC4201003D20FB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2B9F95182DFC4201003D20FB /* thoughtsreframer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2B9F95172DFC4201003D20FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B9F95242DFC4204003D20FB /* Preview Assets.xcassets in Resources */,
+				2B9F95212DFC4204003D20FB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		02E350EE8CE16F8E5892109E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-thoughtsreframer/Pods-thoughtsreframer-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-thoughtsreframer/Pods-thoughtsreframer-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-thoughtsreframer/Pods-thoughtsreframer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		372FD210FA1B76CEFE9D010E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-thoughtsreframer/Pods-thoughtsreframer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-thoughtsreframer/Pods-thoughtsreframer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-thoughtsreframer/Pods-thoughtsreframer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C28BFB905DC97301C95D3BA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-thoughtsreframer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2B9F95152DFC4201003D20FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B9F951F2DFC4201003D20FB /* ContentView.swift in Sources */,
+				2B9F951D2DFC4201003D20FB /* thoughtsreframerApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2B9F95252DFC4204003D20FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2B9F95262DFC4204003D20FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2B9F95282DFC4204003D20FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40DAEE617E00DF48D55C331D /* Pods-thoughtsreframer.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = thoughtsreframer/thoughtsreframer.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEVELOPMENT_ASSET_PATHS = "\"thoughtsreframer/Preview Content\"";
+				DEVELOPMENT_TEAM = G9CMYGC4NX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = thoughtsreframer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.solum.reframe.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2B9F95292DFC4204003D20FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6F95A5BFC12516B5DF5D990 /* Pods-thoughtsreframer.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = thoughtsreframer/thoughtsreframer.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEVELOPMENT_ASSET_PATHS = "\"thoughtsreframer/Preview Content\"";
+				DEVELOPMENT_TEAM = G9CMYGC4NX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = thoughtsreframer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.solum.reframe.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2B9F95142DFC4201003D20FB /* Build configuration list for PBXProject "thoughtsreframer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B9F95252DFC4204003D20FB /* Debug */,
+				2B9F95262DFC4204003D20FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B9F95272DFC4204003D20FB /* Build configuration list for PBXNativeTarget "thoughtsreframer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B9F95282DFC4204003D20FB /* Debug */,
+				2B9F95292DFC4204003D20FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2B9F95112DFC4201003D20FB /* Project object */;
+}

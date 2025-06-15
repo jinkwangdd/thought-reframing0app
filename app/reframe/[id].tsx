@@ -8,6 +8,8 @@ import PromptCard from '@/components/PromptCard';
 import { reframePrompts, aiSystemPrompt } from '@/constants/prompts';
 import { Sparkles } from 'lucide-react-native';
 import { useTranslation } from '@/hooks/useTranslation';
+import { AdBanner, MediumRectangleAd } from '@/components/AdBanner';
+import { useReframingInterstitial } from '@/components/InterstitialAd';
 
 export default function ReframeScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -21,6 +23,12 @@ export default function ReframeScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPrompt, setSelectedPrompt] = useState('');
   const [aiError, setAiError] = useState('');
+  
+  // 리프레이밍 전면 광고 훅
+  const { showReframingAd } = useReframingInterstitial(() => {
+    // 광고 완료 후 실제 리프레이밍 진행
+    performReframing();
+  });
   
   useEffect(() => {
     if (!thought) {
@@ -39,7 +47,7 @@ export default function ReframeScreen() {
     router.replace(`/thought/${id}`);
   };
 
-  const handleAIReframe = async () => {
+  const performReframing = async () => {
     setIsLoading(true);
     setAiError('');
     try {
@@ -74,6 +82,17 @@ export default function ReframeScreen() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleAIReframe = async () => {
+    // 🚀 먼저 전면 광고 표시 시도
+    const adShown = await showReframingAd();
+    
+    if (!adShown) {
+      // 광고를 보여줄 수 없는 경우 바로 리프레이밍 진행
+      performReframing();
+    }
+    // 광고가 표시된 경우 광고 완료 후 performReframing()이 자동 호출됨
   };
 
   const handlePromptSelect = (prompt: string) => {
@@ -131,6 +150,13 @@ export default function ReframeScreen() {
           </ScrollView>
         </View>
         
+        {/* 🎯 중간 광고 배너 */}
+        <MediumRectangleAd 
+          position="middle"
+          showLabel={true}
+          style={styles.middleAd}
+        />
+        
         {selectedPrompt ? (
           <View style={styles.selectedPromptContainer}>
             <Text style={styles.selectedPromptLabel}>{t('considerThis')}</Text>
@@ -181,6 +207,13 @@ export default function ReframeScreen() {
         >
           <Text style={styles.saveButtonText}>{t('saveReframe')}</Text>
         </TouchableOpacity>
+        
+        {/* 🎯 하단 광고 배너 */}
+        <AdBanner 
+          position="bottom"
+          showLabel={true}
+          style={styles.bottomAd}
+        />
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -341,5 +374,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+  },
+  middleAd: {
+    marginVertical: 20,
+    alignSelf: 'center',
+  },
+  bottomAd: {
+    marginTop: 24,
+    marginBottom: 16,
+    alignSelf: 'center',
   },
 });

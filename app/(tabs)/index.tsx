@@ -10,6 +10,7 @@ import EmptyState from '@/components/EmptyState';
 import MoodTracker from '@/components/MoodTracker';
 import StreakCard from '@/components/StreakCard';
 import { useTranslation } from '@/hooks/useTranslation';
+import { AdBanner } from '@/components/AdBanner';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -61,6 +62,14 @@ export default function HomeScreen() {
             {getGreeting()}{username ? `, ${username}` : ''}
           </Text>
           <Text style={styles.subtitle}>{t('howAreYouFeeling')}</Text>
+          
+          {/* 🌟 영감을 주는 명언 */}
+          <View style={styles.quoteContainer}>
+            <Text style={styles.quoteText}>
+              "당신의 생각을 바꾸면, 당신의 세상이 바뀝니다"
+            </Text>
+            <Text style={styles.quoteAuthor}>- 마야 안젤루</Text>
+          </View>
         </View>
         
         <MoodTracker />
@@ -127,61 +136,131 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: 'linear-gradient(135deg, #e8f2ff 0%, #f4f0ff 50%, #fef7f7 100%)',
   },
   scrollView: {
     flex: 1,
   },
   contentContainer: {
-    padding: 16,
-    paddingBottom: 32,
+    padding: 24,
+    paddingBottom: 48,
   },
   header: {
-    marginTop: 8,
-    marginBottom: 24,
+    marginTop: 16,
+    marginBottom: 40,
+    paddingHorizontal: 8,
+    alignItems: 'center',
   },
   greeting: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: colors.text,
-    marginBottom: 4,
+    fontSize: 36,
+    fontWeight: '800',
+    color: '#1a1d29',
+    marginBottom: 12,
+    letterSpacing: -0.8,
+    textAlign: 'center',
+    textShadowColor: 'rgba(255, 255, 255, 0.8)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   subtitle: {
-    fontSize: 16,
-    color: colors.textLight,
+    fontSize: 20,
+    color: '#6b7280',
+    fontWeight: '600',
+    letterSpacing: -0.3,
+    textAlign: 'center',
+    opacity: 0.9,
   },
   addButton: {
-    backgroundColor: colors.primary,
-    borderRadius: 12,
-    padding: 16,
+    backgroundColor: '#7c3aed',
+    borderRadius: 28,
+    padding: 24,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 24,
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
+    marginBottom: 36,
+    marginHorizontal: 8,
+    shadowColor: '#7c3aed',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.35,
+    shadowRadius: 20,
+    elevation: 12,
+    borderWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   addButtonText: {
     color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-    marginLeft: 8,
+    fontSize: 20,
+    fontWeight: '800',
+    marginLeft: 14,
+    letterSpacing: -0.4,
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   section: {
-    marginBottom: 24,
+    marginBottom: 36,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderRadius: 32,
+    padding: 28,
+    marginHorizontal: 4,
+    shadowColor: 'rgba(139, 92, 246, 0.15)',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 1,
+    shadowRadius: 24,
+    elevation: 8,
+    borderWidth: 1.5,
+    borderColor: 'rgba(255, 255, 255, 0.6)',
+    backdropFilter: 'blur(20px)',
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 24,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(139, 92, 246, 0.1)',
   },
   sectionTitle: {
+    fontSize: 24,
+    fontWeight: '800',
+    color: '#2d1b69',
+    letterSpacing: -0.6,
+    textShadowColor: 'rgba(139, 92, 246, 0.1)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+  },
+  quoteContainer: {
+    marginTop: 24,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 24,
+    padding: 20,
+    marginHorizontal: 8,
+    shadowColor: 'rgba(139, 92, 246, 0.2)',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 1,
+    shadowRadius: 16,
+    elevation: 6,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.7)',
+    backdropFilter: 'blur(20px)',
+  },
+  quoteText: {
     fontSize: 18,
     fontWeight: '600',
-    color: colors.text,
+    color: '#4c1d95',
+    textAlign: 'center',
+    lineHeight: 26,
+    letterSpacing: -0.2,
+    fontStyle: 'italic',
+    marginBottom: 8,
+  },
+  quoteAuthor: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#7c3aed',
+    textAlign: 'center',
+    opacity: 0.8,
+    letterSpacing: 0.5,
   },
 });
