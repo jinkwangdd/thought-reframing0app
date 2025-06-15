@@ -51,7 +51,12 @@ jobs:
         
         # Install certificate
         echo "$APPLE_CERTIFICATE" | base64 --decode > certificate.p12
-        security import certificate.p12 -k build.keychain -P "$CERT_PASSWORD" -A
+        
+        # Try importing with password first, then without password
+        if ! security import certificate.p12 -k build.keychain -P "$CERT_PASSWORD" -A 2>/dev/null; then
+          echo "🔄 Password import failed, trying without password..."
+          security import certificate.p12 -k build.keychain -A
+        fi
         
         # Set partition list for the keychain
         security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "temppass" build.keychain
@@ -154,12 +159,15 @@ jobs:
           fi
         fi
         
-        # Try to fix certificate chain and private key association
+                # Try to fix certificate chain and private key association
         if [ -n "$CERT_NAME" ]; then
           echo "🔧 Attempting to fix certificate chain..."
           # Re-import with different flags to ensure private key association
           security delete-certificate -c "$CERT_NAME" build.keychain 2>/dev/null || true
-          security import certificate.p12 -k build.keychain -P "$CERT_PASSWORD" -A -t cert -f pkcs12
+          if ! security import certificate.p12 -k build.keychain -P "$CERT_PASSWORD" -A -t cert -f pkcs12 2>/dev/null; then
+            echo "🔄 Re-import with password failed, trying without password..."
+            security import certificate.p12 -k build.keychain -A -t cert -f pkcs12
+          fi
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "temppass" build.keychain
           
           # Verify the certificate is now visible
@@ -169,7 +177,9 @@ jobs:
           # If still not visible, try system keychain
           if [ "$(security find-identity -v -p codesigning build.keychain | wc -l)" -eq 1 ]; then
             echo "🔄 Trying system keychain import..."
-            security import certificate.p12 -k login.keychain -P "$CERT_PASSWORD" -A -t cert -f pkcs12
+            if ! security import certificate.p12 -k login.keychain -P "$CERT_PASSWORD" -A -t cert -f pkcs12 2>/dev/null; then
+              security import certificate.p12 -k login.keychain -A -t cert -f pkcs12
+            fi
             security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" login.keychain 2>/dev/null || true
           fi
         fi
